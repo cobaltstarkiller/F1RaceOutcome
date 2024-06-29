@@ -1,0 +1,49 @@
+The image depicts the schema of the Ergast Database, which is used for managing Formula 1 racing data. The database consists of multiple interconnected tables. Here's a brief description of each table and its relationships:
+
+drivers: Contains information about drivers.
+Columns: driverId, driverRef, drivers_number, drivers_code, drivers_forename, drivers_surname, drivers_dob, drivers_nationality, drivers_url.
+
+constructors: Contains information about constructors (teams).
+Columns: constructorId, constructorRef, const_name, const_nationality, const_url.
+
+circuits: Contains information about racing circuits.
+Columns: circuitId, circuitRef, circuit_name, circuit_location, circuit_country, circuit_lat, circuit_lng, circuit_alt, circuit_url.
+
+seasons: Contains information about racing seasons.
+Columns: seasons_year, seasons_url.
+
+races: Contains information about races.
+Columns: raceId, year, round, circuitId, name, date, time, url, fp1_date, fp1_time, fp2_date, fp2_time, fp3_date, fp3_time, quali_date, quali_time, sprint_date, sprint_time.
+
+qualifying: Contains qualifying results.
+Columns: qualifyId, raceId, driverId, constructorId, number, position, q1, q2, q3.
+
+results: Contains race results.
+Columns: resultId, raceId, driverId, constructorId, number, grid, position, positionText, positionOrder, points, laps, time, milliseconds, fastestLap, rank, fastestLapTime, fastestLapSpeed, statusId.
+
+sprintResults: Contains sprint race results.
+Columns: sprintResultId, raceId, driverId, constructorId, number, grid, position, positionText, positionOrder, points, laps, time, milliseconds, fastestLap, fastestLapTime, statusId.
+
+driverStandings: Contains driver standings.
+Columns: driverStandingId, raceId, driverId, points, position, positionText, wins.
+
+constructorStandings: Contains constructor standings.
+Columns: constructorStandingId, raceId, constructorId, points, position, positionText, wins.
+
+constructorResults: Contains constructor results for races.
+Columns: constructorResultId, raceId, constructorId, points, status.
+
+pitStops: Contains pit stop information.
+Columns: raceId, driverId, stop, lap, time, duration, milliseconds.
+
+lapTimes: Contains lap times for each race.
+Columns: raceId, driverId, lap, position, time, milliseconds.
+
+status: Contains status information (e.g., finished, retired).
+Columns: statusId, status.
+
+Relationships
+The races table is central and connected to circuits (via circuitId), seasons (via year), qualifying, results, sprintResults, driverStandings, constructorStandings, constructorResults, pitStops, and lapTimes.
+The results, qualifying, sprintResults, pitStops, and lapTimes tables are linked to drivers and constructors.
+status is connected to results and sprintResults via statusId.
+This schema allows for detailed tracking and analysis of Formula 1 data, including driver and constructor performance, race results, lap times, and standings.
