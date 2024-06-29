@@ -1,4 +1,4 @@
-constructorStandingsId,raceId,constructorId,const_standing_points,const_standing_position,positionText,wins
+constructorStandingsId,raceId,constructorId,const_standing_points,const_standing_position,const_standing_positionText,wins
 1,18,1,14,1,"1",1
 2,18,2,8,3,"3",0
 3,18,3,9,2,"2",0
