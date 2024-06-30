@@ -1,0 +1,14 @@
+Types of scalers -
+There are a few common scalers that are used in machine learning projects, such as MinMaxScaler, StandardScaler, and RobustScaler. The choice of scaler depends on the distribution of your data and the requirements of your specific machine learning algorithm.
+
+Here are some guidelines you can consider when deciding which scaler to use for your dataset:
+
+1. MinMaxScaler: If your data has a limited range (e.g., between 0 and 1) and does not have outliers, you can use the MinMaxScaler. This scaler scales the data to a specific range, typically between 0 and 1.
+
+2. StandardScaler: If your data has a Gaussian distribution and does not have outliers, you can use the StandardScaler. This scaler standardizes the data to have a mean of 0 and a standard deviation of 1.
+
+3. RobustScaler: If your data has outliers or if the distribution is not Gaussian, you can use the RobustScaler. This scaler scales the data based on percentiles, making it more robust to outliers.
+
+4. Other scalers: There are other scalers available, such as MaxAbsScaler and PowerTransformer, which may be more suitable for specific types of data distributions. You can experiment with different scalers and choose the one that provides the best performance for your specific dataset and machine learning algorithm.
+
+In general, it is a good practice to experiment with different scalers and evaluate the performance of your machine learning model using cross-validation to determine which scaler works best for your dataset.
