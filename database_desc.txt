@@ -1,49 +1,159 @@
-The image depicts the schema of the Ergast Database, which is used for managing Formula 1 racing data. The database consists of multiple interconnected tables. Here's a brief description of each table and its relationships:
+The image depicts the schema of the Ergast Database, which is a motorsport database containing Formula 1 data. This relational database includes several interconnected tables, each holding specific information related to Formula 1 races, drivers, constructors, circuits, and results. Here's a detailed analysis of each table and its relationships:
 
-drivers: Contains information about drivers.
-Columns: driverId, driverRef, drivers_number, drivers_code, drivers_forename, drivers_surname, drivers_dob, drivers_nationality, drivers_url.
+### Tables and Their Attributes:
 
-constructors: Contains information about constructors (teams).
-Columns: constructorId, constructorRef, const_name, const_nationality, const_url.
+1. **drivers**
+   - `driverId`: Primary Key, int(11)
+   - `driverRef`: varchar(255)
+   - `number`: int(11)
+   - `code`: varchar(3)
+   - `forename`: varchar(255)
+   - `surname`: varchar(255)
+   - `dob`: date
+   - `nationality`: varchar(255)
+   - `url`: varchar(255)
 
-circuits: Contains information about racing circuits.
-Columns: circuitId, circuitRef, circuit_name, circuit_location, circuit_country, circuit_lat, circuit_lng, circuit_alt, circuit_url.
+2. **constructors**
+   - `constructorId`: Primary Key, int(11)
+   - `constructorRef`: varchar(255)
+   - `name`: varchar(255)
+   - `nationality`: varchar(255)
+   - `url`: varchar(255)
 
-seasons: Contains information about racing seasons.
-Columns: seasons_year, seasons_url.
+3. **circuits**
+   - `circuitId`: Primary Key, int(11)
+   - `circuitRef`: varchar(255)
+   - `name`: varchar(255)
+   - `location`: varchar(255)
+   - `country`: varchar(255)
+   - `lat`: float
+   - `lng`: float
+   - `alt`: int(11)
+   - `url`: varchar(255)
 
-races: Contains information about races.
-Columns: raceId, year, round, circuitId, name, date, time, url, fp1_date, fp1_time, fp2_date, fp2_time, fp3_date, fp3_time, quali_date, quali_time, sprint_date, sprint_time.
+4. **seasons**
+   - `year`: Primary Key, int(11)
+   - `url`: varchar(255)
 
-qualifying: Contains qualifying results.
-Columns: qualifyId, raceId, driverId, constructorId, number, position, q1, q2, q3.
+5. **races**
+   - `raceId`: Primary Key, int(11)
+   - `year`: int(11), Foreign Key to `seasons`
+   - `round`: int(11)
+   - `circuitId`: int(11), Foreign Key to `circuits`
+   - `name`: varchar(255)
+   - `date`: date
+   - `url`: varchar(255)
+   - `fp1_date`: date
+   - `fp1_time`: time
+   - `fp2_date`: date
+   - `fp2_time`: time
+   - `fp3_date`: date
+   - `fp3_time`: time
+   - `quali_date`: date
+   - `quali_time`: time
+   - `sprint_date`: date
+   - `sprint_time`: time
 
-results: Contains race results.
-Columns: resultId, raceId, driverId, constructorId, number, grid, position, positionText, positionOrder, points, laps, time, milliseconds, fastestLap, rank, fastestLapTime, fastestLapSpeed, statusId.
+6. **qualifying**
+   - `qualifyId`: Primary Key, int(11)
+   - `raceId`: int(11), Foreign Key to `races`
+   - `driverId`: int(11), Foreign Key to `drivers`
+   - `constructorId`: int(11), Foreign Key to `constructors`
+   - `number`: int(11)
+   - `position`: int(11)
+   - `q1`: varchar(255)
+   - `q2`: varchar(255)
+   - `q3`: varchar(255)
 
-sprintResults: Contains sprint race results.
-Columns: sprintResultId, raceId, driverId, constructorId, number, grid, position, positionText, positionOrder, points, laps, time, milliseconds, fastestLap, fastestLapTime, statusId.
+7. **sprintResults**
+   - `sprintResultId`: Primary Key, int(11)
+   - `raceId`: int(11), Foreign Key to `races`
+   - `driverId`: int(11), Foreign Key to `drivers`
+   - `constructorId`: int(11), Foreign Key to `constructors`
+   - `number`: int(11)
+   - `position`: int(11)
+   - `positionText`: varchar(255)
+   - `positionOrder`: int(11)
+   - `points`: float
+   - `laps`: int(11)
+   - `time`: time
+   - `milliseconds`: int(11)
+   - `fastestLap`: int(11)
+   - `fastestLapTime`: varchar(255)
+   - `statusId`: int(11), Foreign Key to `status`
 
-driverStandings: Contains driver standings.
-Columns: driverStandingId, raceId, driverId, points, position, positionText, wins.
+8. **results**
+   - `resultId`: Primary Key, int(11)
+   - `raceId`: int(11), Foreign Key to `races`
+   - `driverId`: int(11), Foreign Key to `drivers`
+   - `constructorId`: int(11), Foreign Key to `constructors`
+   - `number`: int(11)
+   - `grid`: int(11)
+   - `position`: int(11)
+   - `positionText`: varchar(255)
+   - `positionOrder`: int(11)
+   - `points`: float
+   - `laps`: int(11)
+   - `time`: time
+   - `milliseconds`: int(11)
+   - `fastestLap`: int(11)
+   - `rank`: int(11)
+   - `fastestLapTime`: varchar(255)
+   - `fastestLapSpeed`: varchar(255)
+   - `statusId`: int(11), Foreign Key to `status`
 
-constructorStandings: Contains constructor standings.
-Columns: constructorStandingId, raceId, constructorId, points, position, positionText, wins.
+9. **pitStops**
+   - `raceId`: int(11), Foreign Key to `races`
+   - `driverId`: int(11), Foreign Key to `drivers`
+   - `stop`: int(11)
+   - `lap`: int(11)
+   - `time`: time
+   - `duration`: varchar(255)
+   - `milliseconds`: int(11)
 
-constructorResults: Contains constructor results for races.
-Columns: constructorResultId, raceId, constructorId, points, status.
+10. **lapTimes**
+    - `raceId`: int(11), Foreign Key to `races`
+    - `driverId`: int(11), Foreign Key to `drivers`
+    - `lap`: int(11)
+    - `position`: int(11)
+    - `time`: time
+    - `milliseconds`: int(11)
 
-pitStops: Contains pit stop information.
-Columns: raceId, driverId, stop, lap, time, duration, milliseconds.
+11. **status**
+    - `statusId`: Primary Key, int(11)
+    - `status`: varchar(255)
 
-lapTimes: Contains lap times for each race.
-Columns: raceId, driverId, lap, position, time, milliseconds.
+12. **driverStandings**
+    - `driverStandingId`: Primary Key, int(11)
+    - `raceId`: int(11), Foreign Key to `races`
+    - `driverId`: int(11), Foreign Key to `drivers`
+    - `points`: float
+    - `position`: int(11)
+    - `positionText`: varchar(255)
+    - `wins`: int(11)
 
-status: Contains status information (e.g., finished, retired).
-Columns: statusId, status.
+13. **constructorStandings**
+    - `constructorStandingId`: Primary Key, int(11)
+    - `raceId`: int(11), Foreign Key to `races`
+    - `constructorId`: int(11), Foreign Key to `constructors`
+    - `points`: float
+    - `position`: int(11)
+    - `positionText`: varchar(255)
+    - `wins`: int(11)
 
-Relationships
-The races table is central and connected to circuits (via circuitId), seasons (via year), qualifying, results, sprintResults, driverStandings, constructorStandings, constructorResults, pitStops, and lapTimes.
-The results, qualifying, sprintResults, pitStops, and lapTimes tables are linked to drivers and constructors.
-status is connected to results and sprintResults via statusId.
-This schema allows for detailed tracking and analysis of Formula 1 data, including driver and constructor performance, race results, lap times, and standings.
+14. **constructorResults**
+    - `constructorResultsId`: Primary Key, int(11)
+    - `raceId`: int(11), Foreign Key to `races`
+    - `constructorId`: int(11), Foreign Key to `constructors`
+    - `points`: float
+    - `status`: varchar(255)
+
+### Relationships:
+- The `drivers`, `constructors`, and `circuits` tables are linked to various other tables using their respective primary keys.
+- The `races` table is a central table linked to many other tables using the `raceId`.
+- The `qualifying`, `sprintResults`, `results`, `pitStops`, and `lapTimes` tables contain detailed performance data linked back to `races`, `drivers`, and `constructors`.
+- The `status` table provides the status details linked to the `results` and `sprintResults` tables.
+- The `driverStandings` and `constructorStandings` tables track the standings linked to `races`, `drivers`, and `constructors`.
+- The `constructorResults` table tracks the results of constructors in specific races.
+
+This schema efficiently organizes the complex data related to Formula 1 races, making it possible to query and analyze various aspects of the sport, such as driver performance, race outcomes, and constructor standings.

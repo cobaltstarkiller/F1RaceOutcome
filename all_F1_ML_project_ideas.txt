@@ -69,3 +69,4 @@ Before performing these machine learning tasks, you'll need to preprocess the da
 - **Anomaly Detection:** Isolation forests, one-class SVM, autoencoders
 
 By leveraging these machine learning tasks, you can gain valuable insights and make informed predictions in the context of Formula 1 racing using the Ergast Database.
+
