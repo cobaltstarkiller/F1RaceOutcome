@@ -90,9 +90,10 @@ scikit-learn==1.4.2
 scikit-plot==0.3.7
 scipy==1.11.4
 seaborn==0.13.2
-setuptools==70.1.1
+shap==0.46.0
 six==1.16.0
 sktime==0.26.0
+slicer==0.0.8
 stack-data==0.6.3
 statsmodels==0.14.2
 tbats==1.1.3
